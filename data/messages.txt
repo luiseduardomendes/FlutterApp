@@ -1,0 +1,2 @@
+user,text,datetime
+João Silva,Qual é a carga elementar do elétron?,8-6-2022-2:31
