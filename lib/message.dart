@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:my_app/like_button.dart';
 import 'package:my_app/comment_button.dart';
 import 'package:my_app/body_text.dart';
+import 'post.dart';
 
 class Message extends StatelessWidget {
-  BodyMessage Msg;
-  bool liked;
-  Message({Key? key, required this.Msg, required this.liked}) : super(key: key);
-
+  Post post;
+  Message({Key? key, required this.post}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +28,12 @@ class Message extends StatelessWidget {
                           Icons.person,
                           size: 50,
                         ),
-                        MessageTextBody(msg: Msg)
+                        MessageTextBody(msg: post.bodyMessage)
                       ],
                     ),
                     Align(
                         alignment: Alignment.topCenter,
-                        child: Like_comment_button(liked: liked,)
+                        child: Like_comment_button(post: post,)
                     )
                   ],
                 ),
@@ -47,17 +46,14 @@ class Message extends StatelessWidget {
 }
 
 class Like_comment_button extends StatefulWidget{
-  bool liked;
-  Like_comment_button({Key? key, required this.liked}) : super(key: key);
+  Post post;
+  Like_comment_button({Key? key, required this.post}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => Like_comment_button_state();
 }
 
 class Like_comment_button_state extends State<Like_comment_button> {
-  Color color = Colors.white;
-  String text = 'Curtir';
-
   @override
   Widget build(BuildContext context) {
 
@@ -66,7 +62,7 @@ class Like_comment_button_state extends State<Like_comment_button> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: Like_button(liked: widget.liked,)
+          child: Like_button(post: widget.post,)
         ),
         const Spacer(),
         Padding(

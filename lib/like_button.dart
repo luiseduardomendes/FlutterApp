@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'post.dart';
 
 class Like_button extends StatefulWidget {
-  const Like_button({Key? key, required this.liked}) : super(key: key);
+  Post post;
+  Like_button({Key? key, required this.post}) : super(key: key);
 
-  final bool liked;
 
   @override
   State<Like_button> createState() => _Like_button_state();
 }
 
 class _Like_button_state extends State<Like_button> {
-  String text = 'Curtir';
-  bool liked = false;
-  Color color = Colors.white;
+  late String text;
+  late Color color;
 
   @override
   Widget build(BuildContext context) {
+    if (widget.post.checkLikedStatus()) {
+      color = Theme.of(context).colorScheme.primary;
+      text = 'Curtido';
+    } else {
+      color = Theme.of(context).colorScheme.onPrimary;
+      text = 'Curtir';
+    }
     return Container(
       child: ElevatedButton(
         style: ButtonStyle(
@@ -24,12 +31,12 @@ class _Like_button_state extends State<Like_button> {
         ),
         onPressed: () {
           setState(() {
-            if (liked) {
-              liked = false;
+            if (widget.post.checkLikedStatus()) {
+              widget.post.changeLikedState();
               color = Theme.of(context).colorScheme.onPrimary;
-              text = 'Like';
+              text = 'Curtir';
             } else {
-              liked = true;
+              widget.post.changeLikedState();
               color = Theme.of(context).colorScheme.primary;
               text = 'Curtido';
             }
