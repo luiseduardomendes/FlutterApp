@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/like_button.dart';
+import 'package:my_app/comment_button.dart';
+import 'package:my_app/body_text.dart';
 
 class Message extends StatelessWidget {
-  const Message({Key? key}) : super(key: key);
+  BodyMessage Msg;
+  bool liked;
+  Message({Key? key, required this.Msg, required this.liked}) : super(key: key);
 
-  final String name = 'João Silva';
-  final String topic = 'Física';
-  final String message = 'Qual é a carga elementar do elétron?';
-  final String datetime = '08/06/2022 - 14:37';
 
   @override
   Widget build(BuildContext context) {
@@ -28,48 +29,12 @@ class Message extends StatelessWidget {
                           Icons.person,
                           size: 50,
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                              children: <Widget>[
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Text(
-                                    topic,
-                                    style: Theme.of(context).textTheme.caption,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    name,
-                                    style: Theme.of(context).textTheme.subtitle1,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    message,
-                                    style: Theme.of(context).textTheme.bodyText1,
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Text(
-                                    datetime,
-                                    style: Theme.of(context).textTheme.caption,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        MessageTextBody(msg: Msg)
                       ],
                     ),
-                    const Align(
+                    Align(
                         alignment: Alignment.topCenter,
-                        child: Like_comment_button()
+                        child: Like_comment_button(liked: liked,)
                     )
                   ],
                 ),
@@ -82,15 +47,14 @@ class Message extends StatelessWidget {
 }
 
 class Like_comment_button extends StatefulWidget{
-  const Like_comment_button({Key? key}) : super(key: key);
-
+  bool liked;
+  Like_comment_button({Key? key, required this.liked}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => Like_comment_button_state();
 }
 
 class Like_comment_button_state extends State<Like_comment_button> {
-  bool liked = false;
   Color color = Colors.white;
   String text = 'Curtir';
 
@@ -102,73 +66,67 @@ class Like_comment_button_state extends State<Like_comment_button> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.background),
-            ),
-            onPressed: (){
-              setState((){
-                if (liked){
-                  liked = false;
-                  color = Theme.of(context).colorScheme.onPrimary;
-                  text = 'Curtir';
-                }
-                else{
-                  liked = true;
-                  color = Theme.of(context).colorScheme.primary;
-                  text = 'Curtido';
-                }
-              });
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Icon(
-                  Icons.thumb_up,
-                  color: color,
-                ),
-                Text(
-                  text,
-                  style: TextStyle(
-                    color: color,
-
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: Like_button(liked: widget.liked,)
         ),
         const Spacer(),
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.background),
-            ),
-            onPressed: (){
-              setState((){});
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Icon(
-                  Icons.mode_comment_outlined,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+          child: Comment_button()
+        ),
+      ],
+    );
+  }
+}
 
-                Text(
-                  'Comentar',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
+
+
+class MessageTextBody extends StatelessWidget{
+  BodyMessage msg;
+
+  MessageTextBody({Key? key, required this.msg}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context){
+    return(
+      Container(
+        child: Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    msg.topic,
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    msg.user.name,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    msg.message,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    msg.datetime.getDate(),
+                    style: Theme.of(context).textTheme.caption,
                   ),
                 ),
               ],
             ),
           ),
         ),
-      ],
+      )
     );
   }
-
-
 }

@@ -27,7 +27,7 @@ class _Like_button_state extends State<Like_button> {
             if (liked) {
               liked = false;
               color = Theme.of(context).colorScheme.onPrimary;
-              text = 'Curtir';
+              text = 'Like';
             } else {
               liked = true;
               color = Theme.of(context).colorScheme.primary;
@@ -38,14 +38,20 @@ class _Like_button_state extends State<Like_button> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Icon(
-              Icons.arrow_upward,
-              color: color,
-            ),
-            Text(
-              text,
-              style: TextStyle(
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child:Icon(
+                Icons.arrow_upward,
                 color: color,
+                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child:Text(
+                text,
+                style: TextStyle(
+                color: color,
+                ),
               ),
             ),
           ],
