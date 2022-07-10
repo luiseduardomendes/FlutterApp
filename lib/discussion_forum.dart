@@ -18,7 +18,7 @@ class _DiscussionForumState extends State<DiscussionForum> {
     var posts = getTimeline(viewerId);
     var timeline = <Widget>[];
     for (var post in posts){
-      timeline.add(Message(
+      timeline.add(MessageBox(
         post: getPost(post, viewerId),
       ));
     }

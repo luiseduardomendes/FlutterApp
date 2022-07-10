@@ -84,18 +84,43 @@ class _LoginPageState extends State<LoginPage> {
                     border: UnderlineInputBorder(),
                   ),
                 ),
-                ElevatedButton(
-                  child: const Text('Entrar'),
-                  onPressed: () {
-                    int id = getEmailId(_email);
-                    var pw = getPassword(id);
-                    if (_password == pw) {
-                      Navigator.of(context).pushReplacementNamed(
-                        '/home',
-                        arguments: id,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    child: const Text('Entrar'),
+                    onPressed: () {
+                      int id = getEmailId(_email);
+                      var pw = getPassword(id);
+                      if (_password == pw) {
+                        Navigator.of(context).pushReplacementNamed(
+                          '/home',
+                          arguments: id,
+                        );
+                      }
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: InkWell(
+                    child: const Text('Esqueci minha senha'),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        '/home/password_recover',
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: InkWell(
+                    child: const Text('Criar conta'),
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        '/home/create_account',
                       );
                     }
-                  },
+                  ),
                 ),
                 const Spacer(
                   flex: 4,

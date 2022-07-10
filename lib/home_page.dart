@@ -1,33 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/disc_forum_button.dart';
+import 'package:my_app/logout_button.dart';
+import 'package:my_app/notice_wall_button.dart';
+import 'package:my_app/settings_button.dart';
 
-class MyHomePage extends StatefulWidget {
-
-  MyHomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     int userId = int.parse('${ModalRoute.of(context)?.settings.arguments}');
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/home/discussion', arguments: userId);
-                },
-                child: const Text('Fórum de discussões')),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/');
-                },
-                child: const Text('Log out')),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  const Icon(Icons.menu_book_sharp, size: 100,),
+                  Text('S.O.S. Help Studies', style: Theme.of(context).textTheme.headline4,),
+                ],
+              ),
+              const Spacer(),
+              Expanded(
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  
+                  children: <Widget>[
+                    Container(
+                      width: 150,
+                      height: 150,
+                      padding: const EdgeInsets.all(8.0),
+                      child: DiscussionForumButton(userId: userId),
+                    ),
+                    
+                    Container(
+                      width: 150,
+                      height: 150,
+                      padding: const EdgeInsets.all(8.0),
+                      child: const NoticeWallButton(),
+                    ),
+                            
+                    Container(
+                      width: 150,
+                      height: 150,
+                      padding: const EdgeInsets.all(8.0),
+                      child: SettingsButton(userId: userId),
+                    ),
+                            
+                    Container(
+                      width: 150,
+                      height: 150,
+                      padding: const EdgeInsets.all(8.0),
+                      child: const LogoutButton(),
+                    ),
+                            
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
