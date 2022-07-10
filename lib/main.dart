@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'discussion_forum.dart';
+import 'package:my_app/app_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,15 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark
-      ),
-      //home: const MyHomePage(title: 'S.O.S. Help Studies'),
-      home: const DiscussionForum(title: 'Fórum de Dúvidas')
+      theme: ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark),
+      home: const AppWidget(),
     );
   }
 }
-
-
-

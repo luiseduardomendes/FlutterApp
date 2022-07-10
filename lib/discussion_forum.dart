@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'message.dart';
+import 'package:my_app/message.dart';
+import 'package:my_app/data_export.dart';
 
 class DiscussionForum extends StatefulWidget {
-  const DiscussionForum({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  var viewerId = 0;
+  DiscussionForum({Key? key}) : super(key: key);
 
   @override
   State<DiscussionForum> createState() => _DiscussionForumState();
@@ -14,23 +14,27 @@ class _DiscussionForumState extends State<DiscussionForum> {
 
   @override
   Widget build(BuildContext context) {
+    int viewerId = ModalRoute.of(context)?.settings.arguments as int;
+    var posts = getTimeline(viewerId);
+    var timeline = <Widget>[];
+    for (var post in posts){
+      timeline.add(Message(
+        post: getPost(post, viewerId),
+      ));
+    }
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Fórum de Discussões'),
       ),
-      body: Column(
-        children: const <Widget> [
-          Message()
-        ],
+      body: ListView(
+        children: timeline,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Theme.of(context).focusColor,
-        onPressed: () {
-          setState((){print('Hello, World');});
-        }
-      ),
-
+          backgroundColor: Theme.of(context).focusColor,
+          child: const Icon(Icons.add),
+          onPressed: () {
+            setState(() {});
+          }),
     );
   }
 }

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'discussion_forum.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
-
+  MyHomePage({Key? key}) : super(key: key);
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -14,12 +11,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    int userId = int.parse('${ModalRoute.of(context)?.settings.arguments}');
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(
-        child: DiscussionForum(title: 'Fórum de discussões'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/home/discussion', arguments: userId);
+                },
+                child: const Text('Fórum de discussões')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/');
+                },
+                child: const Text('Log out')),
+          ],
+        ),
       ),
     );
   }
