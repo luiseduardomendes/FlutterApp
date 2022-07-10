@@ -65,9 +65,9 @@ class Like_comment_button_state extends State<Like_comment_button> {
           child: Like_button(post: widget.post,)
         ),
         const Spacer(),
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Comment_button()
+        const Padding(
+          padding: EdgeInsets.all(5.0),
+          child: CommentButton(),
         ),
       ],
     );
@@ -84,42 +84,40 @@ class MessageTextBody extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return(
-      Container(
-        child: Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    msg.topic,
-                    style: Theme.of(context).textTheme.caption,
-                  ),
+      Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  msg.topic,
+                  style: Theme.of(context).textTheme.caption,
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    msg.user.name,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  msg.user.name,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    msg.message,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  msg.message,
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    msg.datetime.getDate(),
-                    style: Theme.of(context).textTheme.caption,
-                  ),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Text(
+                  msg.datetime.getDate(),
+                  style: Theme.of(context).textTheme.caption,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       )

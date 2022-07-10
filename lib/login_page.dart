@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'main.dart';
+import 'data_export.dart';
+import 'dart:io';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,8 +13,11 @@ class _LoginPageState extends State<LoginPage> {
   String _email = '';
   String _password = '';
 
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
@@ -22,44 +25,45 @@ class _LoginPageState extends State<LoginPage> {
           height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column (
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Spacer(flex: 2,),
+                const Spacer(
+                  flex: 2,
+                ),
                 Column(
                   children: [
                     Icon(
-                      Icons.menu_book,size: 100,
+                      Icons.menu_book,
+                      size: 100,
                       color: Theme.of(context).colorScheme.primary,
-                      shadows: [Shadow(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        offset: const Offset(1.0,1.5)
-                      )],
+                      shadows: [
+                        Shadow(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            offset: const Offset(1.0, 1.5))
+                      ],
                     ),
-                    Text(
-                      'S.O.S Help Studies',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontSize: 20.0,
-                        shadows: [
-                          Shadow(
-                            color: Theme.of(context).colorScheme.primary,
-                            offset: const Offset(0.0,1.0),
-                            blurRadius: 5.0,
-                          ),
-                          Shadow(
-                            color: Theme.of(context).colorScheme.primary,
-                            offset: const Offset(1.0,0.0),
-                            blurRadius: 5.0,
-                          )
-                        ]
-                      )
-                    ),
+                    Text('S.O.S Help Studies',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontSize: 20.0,
+                            shadows: [
+                              Shadow(
+                                color: Theme.of(context).colorScheme.primary,
+                                offset: const Offset(0.0, 1.0),
+                                blurRadius: 5.0,
+                              ),
+                              Shadow(
+                                color: Theme.of(context).colorScheme.primary,
+                                offset: const Offset(1.0, 0.0),
+                                blurRadius: 5.0,
+                              )
+                            ])),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 TextField(
-                  onChanged: (text){
+                  onChanged: (text) {
                     _email = text;
                   },
                   keyboardType: TextInputType.emailAddress,
@@ -70,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 TextField(
-                  onChanged: (text){
+                  onChanged: (text) {
                     _password = text;
                   },
                   obscureText: true,
@@ -85,15 +89,17 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     int id = getEmailId(_email);
                     var pw = getPassword(id);
-                    if (_password == pw){
-                      Navigator.of(context).pushReplacementNamed('/home');
-                    }
-                    else{
-                      print('Incorreto');
+                    if (_password == pw) {
+                      Navigator.of(context).pushReplacementNamed(
+                        '/home',
+                        arguments: id,
+                      );
                     }
                   },
                 ),
-                Spacer(flex: 4,),
+                const Spacer(
+                  flex: 4,
+                ),
               ],
             ),
           ),
