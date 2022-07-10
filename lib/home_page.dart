@@ -15,13 +15,26 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home/discussion');
-          },
-          child: const Text('Fórum de discussões')
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/home/discussion');
+              },
+              child: const Text('Fórum de discussões')
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/');
+              },
+              child: const Text('Log out')
+            ),
+          ],
         ),
+
       ),
     );
   }

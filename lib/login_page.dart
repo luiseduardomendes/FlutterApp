@@ -21,10 +21,11 @@ class _LoginPageState extends State<LoginPage> {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column (
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Spacer(flex: 2,),
                 Column(
                   children: [
                     Icon(
@@ -56,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
+                Spacer(),
                 TextField(
                   onChanged: (text){
                     _email = text;
@@ -90,7 +92,8 @@ class _LoginPageState extends State<LoginPage> {
                       print('Incorreto');
                     }
                   },
-                )
+                ),
+                Spacer(flex: 4,),
               ],
             ),
           ),
