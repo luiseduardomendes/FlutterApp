@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    double scale = MediaQuery.of(context).size.width / 2.5;
     int userId = int.parse('${ModalRoute.of(context)?.settings.arguments}');
     return Scaffold(
       body: Center(
@@ -26,36 +27,36 @@ class _HomePageState extends State<HomePage> {
                   Text('S.O.S. Help Studies', style: Theme.of(context).textTheme.headline4,),
                 ],
               ),
-              const Spacer(),
+              const Spacer(flex: 4,),
               Expanded(
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   
                   children: <Widget>[
                     Container(
-                      width: 150,
-                      height: 150,
+                      width: scale,
+                      height: scale,
                       padding: const EdgeInsets.all(8.0),
                       child: DiscussionForumButton(userId: userId),
                     ),
                     
                     Container(
-                      width: 150,
-                      height: 150,
+                      width: scale,
+                      height: scale,
                       padding: const EdgeInsets.all(8.0),
                       child: const NoticeWallButton(),
                     ),
                             
                     Container(
-                      width: 150,
-                      height: 150,
+                      width: scale,
+                      height: scale,
                       padding: const EdgeInsets.all(8.0),
                       child: SettingsButton(userId: userId),
                     ),
                             
                     Container(
-                      width: 150,
-                      height: 150,
+                      width: scale,
+                      height: scale,
                       padding: const EdgeInsets.all(8.0),
                       child: const LogoutButton(),
                     ),
