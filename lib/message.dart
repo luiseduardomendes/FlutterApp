@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_app/Like_button.dart';
 import 'package:my_app/comment_button.dart';
 import 'package:my_app/body_text.dart';
-import 'post.dart';
+import 'package:my_app/post.dart';
 
-class MessageBox extends StatelessWidget {
+class MessageBox extends StatefulWidget {
   Post post;
   MessageBox({Key? key, required this.post}) : super(key: key);
 
+  @override
+  State<MessageBox> createState() => _MessageBoxState();
+}
+
+class _MessageBoxState extends State<MessageBox> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -27,13 +32,13 @@ class MessageBox extends StatelessWidget {
                         Icons.person,
                         size: 50,
                       ),
-                      MessageTextBody(msg: post.bodyMessage)
+                      MessageTextBody(msg: widget.post.bodyMessage)
                     ],
                   ),
                   Align(
                       alignment: Alignment.topCenter,
                       child: LikeCommentButton(
-                        post: post,
+                        post: widget.post,
                     )
                   )
                 ],
